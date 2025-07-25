@@ -1,0 +1,6 @@
+#include "quadrature_and_differentiation/double_exponential.cpp"
+#include "quadrature_and_differentiation/fourier_integrals.cpp"
+#include "quadrature_and_differentiation/trapezoidal.cpp"
+#include "quadrature_and_differentiation/gauss_legendre.cpp"
+#include "quadrature_and_differentiation/gauss_kronrod.cpp"
+#include "quadrature_and_differentiation/numerical_differentiation.cpp"
