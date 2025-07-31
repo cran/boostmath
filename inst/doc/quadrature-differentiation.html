@@ -344,27 +344,27 @@ Differentiation</h1>
 
 <div id="quadrature-and-differentiation" class="section level2">
 <h2>Quadrature and Differentiation</h2>
-<p>The <a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/quadrature.html">Quadrature
+<p>The <a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/quadrature.html">Quadrature
 and Differentiation</a> section of the Boost Math library provides
 methods for numerical integration and differentiation of functions.
 These methods can be used directly in R without needing any additional
 compilation.</p>
 <div id="trapezoidal-quadrature" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/trapezoidal.html">Trapezoidal
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/trapezoidal.html">Trapezoidal
 Quadrature</a></h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Trapezoidal rule integration of sin(x) from 0 to pi</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">trapezoidal</span>(sin, <span class="dv">0</span>, pi)</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
 </div>
 <div id="gauss-legendre-quadrature" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/gauss.html">Gauss-Legendre
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/gauss.html">Gauss-Legendre
 Quadrature</a></h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Gauss-Legendre integration of exp(x) from 0 to 1</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">gauss_legendre</span>(exp, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">points =</span> <span class="dv">7</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; [1] 1.718282</span></span></code></pre></div>
 </div>
 <div id="gauss-kronrod-quadrature" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/gauss_kronrod.html">Gauss-Kronrod
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/gauss_kronrod.html">Gauss-Kronrod
 Quadrature</a></h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Adaptive Gauss-Kronrod integration of log(x) from 1 to 2</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">gauss_kronrod</span>(log, <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">points =</span> <span class="dv">15</span>, <span class="at">max_depth =</span> <span class="dv">10</span>)</span>
@@ -375,7 +375,7 @@ Quadrature</a></h3>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.3862944</span></span></code></pre></div>
 </div>
 <div id="double-exponential-quadrature" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/double_exponential.html">Double-Exponential
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/double_exponential.html">Double-Exponential
 Quadrature</a></h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Tanh-sinh quadrature of log(x) from 0 to 1</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">tanh_sinh</span>(<span class="cf">function</span>(x) { <span class="fu">log</span>(x) <span class="sc">*</span> <span class="fu">log1p</span>(<span class="sc">-</span>x) }, <span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span>
@@ -388,7 +388,7 @@ Quadrature</a></h3>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; [1] 0.3333333</span></span></code></pre></div>
 </div>
 <div id="fourier-integrals" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/fourier_integrals.html">Fourier
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/fourier_integrals.html">Fourier
 Integrals</a></h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Fourier sine integral of sin(x) with omega = 1</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">ooura_fourier_sin</span>(<span class="cf">function</span>(x) { <span class="dv">1</span> <span class="sc">/</span> x }, <span class="at">omega =</span> <span class="dv">1</span>)</span>
@@ -402,7 +402,7 @@ Integrals</a></h3>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; [1] 6.417739e-09</span></span></code></pre></div>
 </div>
 <div id="numerical-differentiation" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/diff.html">Numerical
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/diff.html">Numerical
 Differentiation</a></h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Finite difference derivative of sin(x) at pi/4</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">finite_difference_derivative</span>(sin, pi <span class="sc">/</span> <span class="dv">4</span>)</span>

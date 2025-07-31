@@ -344,13 +344,13 @@ Algorithms</h1>
 
 <div id="root-finding-minimisation-algorithms" class="section level2">
 <h2>Root Finding &amp; Minimisation Algorithms</h2>
-<p>The <a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/root_finding.html">Root
+<p>The <a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/root_finding.html">Root
 Finding &amp; Minimization Algorithms</a> section of the Boost Math
 library provides methods for finding minima and roots of functions.
 These methods can be used directly in R without needing any additional
 compilation.</p>
 <div id="root-finding-without-derivatives" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/roots_noderiv.html">Root
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/roots_noderiv.html">Root
 Finding Without Derivatives</a></h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Example of finding a root using bisection method</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span></span>
@@ -387,7 +387,7 @@ Finding Without Derivatives</a></h3>
 <span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="co">#&gt; [1] 9</span></span></code></pre></div>
 </div>
 <div id="root-finding-with-derivatives" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/roots_deriv.html">Root
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/roots_deriv.html">Root
 Finding With Derivatives</a></h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Example of finding a root using Newton-Raphson method</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">c</span>(x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="dv">2</span> <span class="sc">*</span> x)</span>
@@ -411,14 +411,14 @@ Finding With Derivatives</a></h3>
 <div id="polynomial-roots" class="section level3">
 <h3>Polynomial Roots</h3>
 <div id="quadratic-roots" class="section level4">
-<h4><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/roots_deriv.html#math_toolkit.roots_deriv.quadratics">Quadratic
+<h4><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/roots_deriv.html#math_toolkit.roots_deriv.quadratics">Quadratic
 Roots</a></h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Example of finding quadratic roots</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">quadratic_roots</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">2</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; [1] 1 2</span></span></code></pre></div>
 </div>
 <div id="cubic-roots" class="section level4">
-<h4><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/cubic_roots.html">Cubic
+<h4><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/cubic_roots.html">Cubic
 Roots</a></h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Example of finding cubic roots</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">cubic_roots</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">6</span>, <span class="dv">11</span>, <span class="sc">-</span><span class="dv">6</span>)</span>
@@ -431,7 +431,7 @@ Roots</a></h4>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; [1] 12</span></span></code></pre></div>
 </div>
 <div id="quartic-roots" class="section level4">
-<h4><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/quartic_roots.html">Quartic
+<h4><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/quartic_roots.html">Quartic
 Roots</a></h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Example of finding quartic roots</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">quartic_roots</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">10</span>, <span class="dv">35</span>, <span class="sc">-</span><span class="dv">50</span>, <span class="dv">24</span>)</span>
@@ -439,7 +439,7 @@ Roots</a></h4>
 </div>
 </div>
 <div id="finding-function-minima-with-brents-algorithm" class="section level3">
-<h3><a href="https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/brent_minima.html">Finding
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/brent_minima.html">Finding
 Function Minima with Brent’s Algorithm</a></h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Example of finding a minimum using Brent&#39;s method</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) (x <span class="sc">-</span> <span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">1</span></span>

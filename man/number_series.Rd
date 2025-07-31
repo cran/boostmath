@@ -49,8 +49,6 @@ Efficient computation of Bernoulli numbers, tangent numbers, fibonacci numbers, 
 The \code{checked_} functions ensure that the input is within valid bounds, while the \code{unchecked_} functions do not perform such checks,
 allowing for potentially faster computation at the risk of overflow or invalid input.
 
-The \code{range_} functions allow for computing a sequence of numbers starting from a specified index.
-
 The \code{max_} functions return the maximum index for which the respective numbers can be computed using precomputed lookup tables.
 }
 \examples{
@@ -66,5 +64,5 @@ fibonacci(10)
 unchecked_fibonacci(10)
 }
 \seealso{
-\href{https://www.boost.org/doc/libs/1_87_0/libs/math/doc/html/math_toolkit/number_series.html}{Boost Documentation} for more details on the mathematical background.
+\href{https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/number_series.html}{Boost Documentation} for more details on the mathematical background.
 }

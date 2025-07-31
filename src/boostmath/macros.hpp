@@ -107,7 +107,7 @@
   }
 
 #define BINARY_DISTRIBUTION_BOOST_IMPL(func, dist, arg1_type, arg2_type) \
-  extern "C" SEXP dist##_##func##_(SEXP x_, SEXP y_, SEXP z_) { \
+  extern "C" SEXP dist##_##func##_(SEXP x_, SEXP y_) { \
     BEGIN_CPP11 \
     const arg1_type x = boostmath::as_cpp<arg1_type>(x_); \
     const arg2_type y = boostmath::as_cpp<arg2_type>(y_); \
