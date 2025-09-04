@@ -541,6 +541,142 @@ extern "C" {
   // rootfinding_and_minimisation/minima.cpp
   SEXP brent_find_minima_(SEXP f_, SEXP a_, SEXP b_, SEXP digits_, SEXP max_iter_);
 
+  // constants.cpp
+  SEXP constants_();
+
+  // statistics/univariate_statistics.cpp
+  SEXP mean_(SEXP x_);
+  SEXP variance_(SEXP x_);
+  SEXP sample_variance_(SEXP x_);
+  SEXP mean_and_sample_variance_(SEXP x_);
+  SEXP skewness_(SEXP x_);
+  SEXP kurtosis_(SEXP x_);
+  SEXP excess_kurtosis_(SEXP x_);
+  SEXP first_four_moments_(SEXP x_);
+  SEXP median_(SEXP x_);
+  SEXP median_absolute_deviation_(SEXP x_);
+  SEXP interquartile_range_(SEXP x_);
+  SEXP gini_coefficient_(SEXP x_);
+  SEXP sample_gini_coefficient_(SEXP x_);
+  SEXP mode_(SEXP x_);
+
+  // statistics/bivariate_statistics.cpp
+  SEXP covariance_(SEXP x_, SEXP y_);
+  SEXP means_and_covariance_(SEXP x_, SEXP y_);
+  SEXP correlation_coefficient_(SEXP x_, SEXP y_);
+
+  // statistics/signal_statistics.cpp
+  SEXP absolute_gini_coefficient_(SEXP x_);
+  SEXP sample_absolute_gini_coefficient_(SEXP x_);
+  SEXP hoyer_sparsity_(SEXP x_);
+  SEXP oracle_snr_(SEXP x_, SEXP y_);
+  SEXP oracle_snr_db_(SEXP x_, SEXP y_);
+  SEXP m2m4_snr_estimator_(SEXP x_, SEXP y_, SEXP z_);
+  SEXP m2m4_snr_estimator_db_(SEXP x_, SEXP y_, SEXP z_);
+
+  // statistics/anderson_darling_test.cpp
+  SEXP anderson_darling_normality_statistic_(SEXP x_, SEXP y_, SEXP z_);
+
+  // statistics/t_tests.cpp
+  SEXP one_sample_t_test_params_(SEXP x_, SEXP y_, SEXP z_, SEXP w_);
+  SEXP one_sample_t_test_(SEXP x_, SEXP y_);
+  SEXP two_sample_t_test_(SEXP x_, SEXP y_);
+  SEXP paired_samples_t_test_(SEXP x_, SEXP y_);
+
+  // statistics/z_tests.cpp
+  SEXP one_sample_z_test_params_(SEXP x_, SEXP y_, SEXP z_, SEXP w_);
+  SEXP one_sample_z_test_(SEXP x_, SEXP y_);
+  SEXP two_sample_z_test_(SEXP x_, SEXP y_);
+
+  // statistics/runs_tests.cpp
+  SEXP runs_above_and_below_threshold_(SEXP x_, SEXP y_);
+  SEXP runs_above_and_below_median_(SEXP x_);
+
+  // statistics/ljung_box_test.cpp
+  SEXP ljung_box_(SEXP x_, SEXP y_, SEXP z_);
+
+  // statistics/linear_regression.cpp
+  SEXP simple_ordinary_least_squares_(SEXP x_, SEXP y_);
+  SEXP simple_ordinary_least_squares_with_R_squared_(SEXP x_, SEXP y_);
+
+  // statistics/chatterjee_correlation.cpp
+  SEXP chatterjee_correlation_(SEXP x_, SEXP y_);
+
+  // interpolators/barycentric_rational.cpp
+  SEXP barycentric_rational_init_(SEXP x_, SEXP y_, SEXP order_);
+  SEXP barycentric_rational_eval_(SEXP ptr_, SEXP x_);
+  SEXP barycentric_rational_prime_(SEXP ptr_, SEXP x_);
+
+  // interpolators/bezier_polynomial.cpp
+  SEXP bezier_polynomial_init_(SEXP control_points_);
+  SEXP bezier_polynomial_eval_(SEXP ptr_, SEXP x_);
+  SEXP bezier_polynomial_prime_(SEXP ptr_, SEXP x_);
+  SEXP bezier_polynomial_edit_control_point_(SEXP ptr_, SEXP p_, SEXP index_);
+
+  // interpolators/bilinear_uniform.cpp
+  SEXP bilinear_uniform_init_(SEXP fieldData_, SEXP rows_, SEXP cols_, SEXP dx_, SEXP dy_, SEXP x0_, SEXP y0_);
+  SEXP bilinear_uniform_eval_(SEXP ptr_, SEXP x_, SEXP y_);
+
+  // interpolators/cardinal_cubic_b_spline.cpp
+  SEXP cardinal_cubic_b_spline_init_(SEXP y_, SEXP t0_, SEXP h_, SEXP left_endpoint_derivative_, SEXP right_endpoint_derivative_);
+  SEXP cardinal_cubic_b_spline_eval_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_cubic_b_spline_prime_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_cubic_b_spline_double_prime_(SEXP ptr_, SEXP x_);
+
+  // interpolators/cardinal_quadratic_b_spline.cpp
+  SEXP cardinal_quadratic_b_spline_init_(SEXP y_, SEXP t0_, SEXP h_, SEXP left_endpoint_derivative_, SEXP right_endpoint_derivative_);
+  SEXP cardinal_quadratic_b_spline_eval_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_quadratic_b_spline_prime_(SEXP ptr_, SEXP x_);
+
+  // interpolators/cardinal_quintic_b_spline.cpp
+  SEXP cardinal_quintic_b_spline_init_(SEXP y_, SEXP t0_, SEXP h_, SEXP left_endpoint_derivative_, SEXP right_endpoint_derivative_);
+  SEXP cardinal_quintic_b_spline_eval_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_quintic_b_spline_prime_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_quintic_b_spline_double_prime_(SEXP ptr_, SEXP x_);
+
+  // interpolators/catmull_rom.cpp
+  SEXP catmull_rom_init_(SEXP points_, SEXP closed_, SEXP alpha_);
+  SEXP catmull_rom_eval_(SEXP ptr_, SEXP x_);
+  SEXP catmull_rom_prime_(SEXP ptr_, SEXP x_);
+  SEXP catmull_rom_max_parameter_(SEXP ptr_);
+  SEXP catmull_rom_parameter_at_point_(SEXP ptr_, SEXP i_);
+
+  // interpolators/cubic_hermite.cpp
+  SEXP cubic_hermite_init_(SEXP abscissas_, SEXP ordinates_, SEXP derivatives_);
+  SEXP cubic_hermite_eval_(SEXP ptr_, SEXP x_);
+  SEXP cubic_hermite_prime_(SEXP ptr_, SEXP x_);
+  SEXP cubic_hermite_push_back_(SEXP ptr_, SEXP x_, SEXP y_, SEXP dydx_);
+  SEXP cubic_hermite_domain_(SEXP ptr_);
+  SEXP cardinal_cubic_hermite_init_(SEXP y_, SEXP dydx_, SEXP x0_, SEXP dx_);
+  SEXP cardinal_cubic_hermite_eval_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_cubic_hermite_prime_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_cubic_hermite_domain_(SEXP ptr_);
+
+  // interpolators/makima.cpp
+  SEXP makima_init_(SEXP abscissa_, SEXP ordinates_, SEXP left_endpoint_derivative_, SEXP right_endpoint_derivative_);
+  SEXP makima_eval_(SEXP ptr_, SEXP x_);
+  SEXP makima_prime_(SEXP ptr_, SEXP x_);
+  SEXP makima_push_back_(SEXP ptr_, SEXP x_, SEXP y_);
+
+  // interpolators/pchip.cpp
+  SEXP pchip_init_(SEXP abscissa_, SEXP ordinates_, SEXP left_endpoint_derivative_, SEXP right_endpoint_derivative_);
+  SEXP pchip_eval_(SEXP ptr_, SEXP x_);
+  SEXP pchip_prime_(SEXP ptr_, SEXP x_);
+  SEXP pchip_push_back_(SEXP ptr_, SEXP x_, SEXP y_);
+
+  // interpolators/quintic_hermite.cpp
+  SEXP quintic_hermite_init_(SEXP x_, SEXP y_, SEXP dydx_, SEXP dy2dx2_);
+  SEXP quintic_hermite_eval_(SEXP ptr_, SEXP x_);
+  SEXP quintic_hermite_prime_(SEXP ptr_, SEXP x_);
+  SEXP quintic_hermite_double_prime_(SEXP ptr_, SEXP x_);
+  SEXP quintic_hermite_push_back_(SEXP ptr_, SEXP x_, SEXP y_, SEXP dydx_, SEXP dy2dx2_);
+  SEXP quintic_hermite_domain_(SEXP ptr_);
+  SEXP cardinal_quintic_hermite_init_(SEXP y_, SEXP dydx_, SEXP dy2dx2_, SEXP x0_, SEXP dx_);
+  SEXP cardinal_quintic_hermite_eval_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_quintic_hermite_prime_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_quintic_hermite_double_prime_(SEXP ptr_, SEXP x_);
+  SEXP cardinal_quintic_hermite_domain_(SEXP ptr_);
+
   static const R_CallMethodDef CallEntries[] = {
     // gamma_functions.cpp
     {"tgamma_",     (DL_FUNC) &tgamma_,     1},
@@ -1081,6 +1217,142 @@ extern "C" {
 
     // rootfinding_and_minimisation/minima.cpp
     {"brent_find_minima_", (DL_FUNC) &brent_find_minima_, 5},
+
+    // constants.cpp
+    {"constants_", (DL_FUNC) &constants_, 0},
+
+    // statistics/univariate_statistics.cpp
+    {"mean_", (DL_FUNC) &mean_, 1},
+    {"variance_", (DL_FUNC) &variance_, 1},
+    {"sample_variance_", (DL_FUNC) &sample_variance_, 1},
+    {"mean_and_sample_variance_", (DL_FUNC) &mean_and_sample_variance_, 1},
+    {"skewness_", (DL_FUNC) &skewness_, 1},
+    {"kurtosis_", (DL_FUNC) &kurtosis_, 1},
+    {"excess_kurtosis_", (DL_FUNC) &excess_kurtosis_, 1},
+    {"first_four_moments_", (DL_FUNC) &first_four_moments_, 1},
+    {"median_", (DL_FUNC) &median_, 1},
+    {"median_absolute_deviation_", (DL_FUNC) &median_absolute_deviation_, 1},
+    {"interquartile_range_", (DL_FUNC) &interquartile_range_, 1},
+    {"gini_coefficient_", (DL_FUNC) &gini_coefficient_, 1},
+    {"sample_gini_coefficient_", (DL_FUNC) &sample_gini_coefficient_, 1},
+    {"mode_", (DL_FUNC) &mode_, 1},
+
+    // statistics/bivariate_statistics.cpp
+    {"covariance_", (DL_FUNC) &covariance_, 2},
+    {"means_and_covariance_", (DL_FUNC) &means_and_covariance_, 2},
+    {"correlation_coefficient_", (DL_FUNC) &correlation_coefficient_, 2},
+
+    // statistics/signal_statistics.cpp
+    {"absolute_gini_coefficient_", (DL_FUNC) &absolute_gini_coefficient_, 1},
+    {"sample_absolute_gini_coefficient_", (DL_FUNC) &sample_absolute_gini_coefficient_, 1},
+    {"hoyer_sparsity_", (DL_FUNC) &hoyer_sparsity_, 1},
+    {"oracle_snr_", (DL_FUNC) &oracle_snr_, 2},
+    {"oracle_snr_db_", (DL_FUNC) &oracle_snr_db_, 2},
+    {"m2m4_snr_estimator_db_", (DL_FUNC) &m2m4_snr_estimator_db_, 3},
+    {"m2m4_snr_estimator_", (DL_FUNC) &m2m4_snr_estimator_, 3},
+
+    // statistics/anderson_darling_test.cpp
+    {"anderson_darling_normality_statistic_", (DL_FUNC) &anderson_darling_normality_statistic_,  3},
+
+    // statistics/t_tests.cpp
+    {"one_sample_t_test_params_", (DL_FUNC) &one_sample_t_test_params_,  4},
+    {"one_sample_t_test_", (DL_FUNC) &one_sample_t_test_,  2},
+    {"two_sample_t_test_", (DL_FUNC) &two_sample_t_test_,  2},
+    {"paired_samples_t_test_", (DL_FUNC) &paired_samples_t_test_,  2},
+
+    // statistics/z_tests.cpp
+    {"one_sample_z_test_params_", (DL_FUNC) &one_sample_t_test_params_,  4},
+    {"one_sample_z_test_", (DL_FUNC) &one_sample_t_test_,  2},
+    {"two_sample_z_test_", (DL_FUNC) &two_sample_t_test_,  2},
+
+    // statistics/runs_tests.cpp
+    {"runs_above_and_below_threshold_", (DL_FUNC) &runs_above_and_below_threshold_,  2},
+    {"runs_above_and_below_median_", (DL_FUNC) &runs_above_and_below_median_,  1},
+
+    // statistics/ljung_box_test.cpp
+    {"ljung_box_", (DL_FUNC) &ljung_box_,  3},
+
+    // statistics/linear_regression.cpp
+    {"simple_ordinary_least_squares_", (DL_FUNC) &simple_ordinary_least_squares_,  2},
+    {"simple_ordinary_least_squares_with_R_squared_", (DL_FUNC) &simple_ordinary_least_squares_with_R_squared_,  2},
+
+    // statistics/chatterjee_correlation.cpp
+    {"chatterjee_correlation_", (DL_FUNC) &chatterjee_correlation_,  2},
+
+    // interpolators/barycentric_rational.cpp
+    {"barycentric_rational_init_", (DL_FUNC) &barycentric_rational_init_,  3},
+    {"barycentric_rational_eval_", (DL_FUNC) &barycentric_rational_eval_,  2},
+    {"barycentric_rational_prime_", (DL_FUNC) &barycentric_rational_prime_,  2},
+
+    // interpolators/bezier_polynomial.cpp
+    {"bezier_polynomial_init_", (DL_FUNC) &bezier_polynomial_init_,  1},
+    {"bezier_polynomial_eval_", (DL_FUNC) &bezier_polynomial_eval_,  2},
+    {"bezier_polynomial_prime_", (DL_FUNC) &bezier_polynomial_prime_,  2},
+    {"bezier_polynomial_edit_control_point_", (DL_FUNC) &bezier_polynomial_edit_control_point_,  3},
+
+    // interpolators/bilinear_uniform.cpp
+    {"bilinear_uniform_init_", (DL_FUNC) &bilinear_uniform_init_,  7},
+    {"bilinear_uniform_eval_", (DL_FUNC) &bilinear_uniform_eval_,  3},
+
+    // interpolators/cardinal_cubic_b_spline.cpp
+    {"cardinal_cubic_b_spline_init_", (DL_FUNC) &cardinal_cubic_b_spline_init_,  5},
+    {"cardinal_cubic_b_spline_eval_", (DL_FUNC) &cardinal_cubic_b_spline_eval_,  2},
+    {"cardinal_cubic_b_spline_prime_", (DL_FUNC) &cardinal_cubic_b_spline_prime_,  2},
+    {"cardinal_cubic_b_spline_double_prime_", (DL_FUNC) &cardinal_cubic_b_spline_double_prime_,  2},
+
+    // interpolators/cardinal_quadratic_b_spline.cpp
+    {"cardinal_quadratic_b_spline_init_", (DL_FUNC) &cardinal_quadratic_b_spline_init_,  5},
+    {"cardinal_quadratic_b_spline_eval_", (DL_FUNC) &cardinal_quadratic_b_spline_eval_,  2},
+    {"cardinal_quadratic_b_spline_prime_", (DL_FUNC) &cardinal_quadratic_b_spline_prime_,  2},
+
+    // interpolators/cardinal_quintic_b_spline.cpp
+    {"cardinal_quintic_b_spline_init_", (DL_FUNC) &cardinal_quintic_b_spline_init_,  5},
+    {"cardinal_quintic_b_spline_eval_", (DL_FUNC) &cardinal_quintic_b_spline_eval_,  2},
+    {"cardinal_quintic_b_spline_prime_", (DL_FUNC) &cardinal_quintic_b_spline_prime_,  2},
+    {"cardinal_quintic_b_spline_double_prime_", (DL_FUNC) &cardinal_quintic_b_spline_double_prime_,  2},
+
+    // interpolators/catmull_rom.cpp
+    {"catmull_rom_init_", (DL_FUNC) &catmull_rom_init_,  3},
+    {"catmull_rom_eval_", (DL_FUNC) &catmull_rom_eval_,  2},
+    {"catmull_rom_prime_", (DL_FUNC) &catmull_rom_prime_,  2},
+    {"catmull_rom_max_parameter_", (DL_FUNC) &catmull_rom_max_parameter_,  1},
+    {"catmull_rom_parameter_at_point_", (DL_FUNC) &catmull_rom_parameter_at_point_,  2},
+
+    // interpolators/cubic_hermite.cpp
+    {"cubic_hermite_init_", (DL_FUNC) &cubic_hermite_init_,  3},
+    {"cubic_hermite_eval_", (DL_FUNC) &cubic_hermite_eval_,  2},
+    {"cubic_hermite_prime_", (DL_FUNC) &cubic_hermite_prime_,  2},
+    {"cubic_hermite_push_back_", (DL_FUNC) &cubic_hermite_push_back_,  4},
+    {"cubic_hermite_domain_", (DL_FUNC) &cubic_hermite_domain_,  1},
+    {"cardinal_cubic_hermite_init_", (DL_FUNC) &cardinal_cubic_hermite_init_,  4},
+    {"cardinal_cubic_hermite_eval_", (DL_FUNC) &cardinal_cubic_hermite_eval_,  2},
+    {"cardinal_cubic_hermite_prime_", (DL_FUNC) &cardinal_cubic_hermite_prime_,  2},
+    {"cardinal_cubic_hermite_domain_", (DL_FUNC) &cardinal_cubic_hermite_domain_,  1},
+
+    // interpolators/makima.cpp
+    {"makima_init_", (DL_FUNC) &makima_init_,  4},
+    {"makima_eval_", (DL_FUNC) &makima_eval_,  2},
+    {"makima_prime_", (DL_FUNC) &makima_prime_,  2},
+    {"makima_push_back_", (DL_FUNC) &makima_push_back_,  3},
+
+    // interpolators/pchip.cpp
+    {"pchip_init_", (DL_FUNC) &pchip_init_,  4},
+    {"pchip_eval_", (DL_FUNC) &pchip_eval_,  2},
+    {"pchip_prime_", (DL_FUNC) &pchip_prime_,  2},
+    {"pchip_push_back_", (DL_FUNC) &pchip_push_back_,  3},
+
+    // interpolators/quintic_hermite.cpp
+    {"quintic_hermite_init_", (DL_FUNC) &quintic_hermite_init_,  4},
+    {"quintic_hermite_eval_", (DL_FUNC) &quintic_hermite_eval_,  2},
+    {"quintic_hermite_prime_", (DL_FUNC) &quintic_hermite_prime_,  2},
+    {"quintic_hermite_double_prime_", (DL_FUNC) &quintic_hermite_double_prime_,  2},
+    {"quintic_hermite_push_back_", (DL_FUNC) &quintic_hermite_push_back_,  5},
+    {"quintic_hermite_domain_", (DL_FUNC) &quintic_hermite_domain_,  1},
+    {"cardinal_quintic_hermite_init_", (DL_FUNC) &cardinal_quintic_hermite_init_,  5},
+    {"cardinal_quintic_hermite_eval_", (DL_FUNC) &cardinal_quintic_hermite_eval_,  2},
+    {"cardinal_quintic_hermite_prime_", (DL_FUNC) &cardinal_quintic_hermite_prime_,  2},
+    {"cardinal_quintic_hermite_double_prime_", (DL_FUNC) &cardinal_quintic_hermite_double_prime_,  2},
+    {"cardinal_quintic_hermite_domain_", (DL_FUNC) &cardinal_quintic_hermite_domain_,  1},
 
     {NULL, NULL, 0}
   };

@@ -391,15 +391,9 @@ Quadrature</a></h3>
 <h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/fourier_integrals.html">Fourier
 Integrals</a></h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Fourier sine integral of sin(x) with omega = 1</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">ooura_fourier_sin</span>(<span class="cf">function</span>(x) { <span class="dv">1</span> <span class="sc">/</span> x }, <span class="at">omega =</span> <span class="dv">1</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; [1] 1.570796</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;relative_error&quot;)</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; [1] 1.26555e-11</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Fourier cosine integral of cos(x) with omega = 1</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="fu">ooura_fourier_cos</span>(<span class="cf">function</span>(x) { <span class="dv">1</span><span class="sc">/</span> (x <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span>) }, <span class="at">omega =</span> <span class="dv">1</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; [1] 0.5778637</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;relative_error&quot;)</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; [1] 6.417739e-09</span></span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># ooura_fourier_sin(function(x) { 1 / x }, omega = 1)</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Fourier cosine integral of cos(x) with omega = 1</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># ooura_fourier_cos(function(x) { 1/ (x * x + 1) }, omega = 1)</span></span></code></pre></div>
 </div>
 <div id="numerical-differentiation" class="section level3">
 <h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/diff.html">Numerical

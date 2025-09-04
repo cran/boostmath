@@ -32,9 +32,9 @@ exp_sinh(function(x) { exp(-3 * x) }, a = 0, b = Inf)
 
 ## -----------------------------------------------------------------------------
 # Fourier sine integral of sin(x) with omega = 1
-ooura_fourier_sin(function(x) { 1 / x }, omega = 1)
+# ooura_fourier_sin(function(x) { 1 / x }, omega = 1)
 # Fourier cosine integral of cos(x) with omega = 1
-ooura_fourier_cos(function(x) { 1/ (x * x + 1) }, omega = 1)
+# ooura_fourier_cos(function(x) { 1/ (x * x + 1) }, omega = 1)
 
 ## -----------------------------------------------------------------------------
 # Finite difference derivative of sin(x) at pi/4
