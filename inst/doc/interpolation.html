@@ -355,7 +355,7 @@ Cubic B-Spline</a></h3>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>spline_obj <span class="ot">&lt;-</span> <span class="fu">cardinal_cubic_b_spline</span>(y, t0, h)</span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>spline_obj<span class="sc">$</span><span class="fu">spline</span>(x)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>spline_obj<span class="sc">$</span><span class="fu">interpolate</span>(x)</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; [1] 2.895833</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>spline_obj<span class="sc">$</span><span class="fu">prime</span>(x)</span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#&gt; [1] 0.125</span></span>
@@ -372,7 +372,7 @@ Rational Interpolation</a></h3>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.9375</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">derivative</span>(xi)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; [1] -2.291667</span></span></code></pre></div>
 </div>
 <div id="bezier-polynomial" class="section level3">
@@ -380,11 +380,11 @@ Rational Interpolation</a></h3>
 Polynomial</a></h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>control_points <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">bezier_polynomial</span>(control_points)</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; [1] NaN NaN NaN</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; [1] 2.400 1.728 0.000</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; [1]  3.00 30.75  0.00</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; [1] 3.00 4.08 0.00</span></span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>new_control_point <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">edit_control_point</span>(new_control_point, <span class="dv">2</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
@@ -396,7 +396,7 @@ Uniform</a></h3>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">bilinear_uniform</span>(x, <span class="at">rows =</span> <span class="dv">2</span>, <span class="at">cols =</span> <span class="dv">5</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>yi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi, yi)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi, yi)</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.3333333</span></span></code></pre></div>
 </div>
 <div id="cardinal-quadratic-b-spline" class="section level3">
@@ -407,7 +407,7 @@ Quadratic B-Spline</a></h3>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">cardinal_quadratic_b_spline</span>(y, t0, h)</span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.7857143</span></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; [1] 1.142857</span></span></code></pre></div>
@@ -420,19 +420,19 @@ Quintic B-Spline</a></h3>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">cardinal_quintic_b_spline</span>(y, t0, h)</span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.02631579</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; [1] 0.05263158</span></span>
 <span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">double_prime</span>(xi)</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; [1] 4.358112e-16</span></span></code></pre></div>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; [1] 8.84709e-17</span></span></code></pre></div>
 </div>
 <div id="catmull-rom" class="section level3">
 <h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/catmull_rom.html">Catmull-Rom</a></h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>control_points <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">catmull_rom</span>(control_points)</span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; [1] 1.2613446 0.8307972 0.0000000</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; [1]  0.8408964 -1.1363078  0.0000000</span></span>
@@ -449,7 +449,7 @@ Hermite</a></h3>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>dydx <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">cubic_hermite</span>(x, y, dydx)</span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.625</span></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; [1] 1.25</span></span>
@@ -465,7 +465,7 @@ Cubic Hermite</a></h3>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>dydx <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">cardinal_cubic_hermite</span>(y, dydx, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.625</span></span>
 <span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; [1] 1.25</span></span>
@@ -479,7 +479,7 @@ Akima</a></h3>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">makima</span>(x, y)</span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.7291667</span></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; [1] 1.208333</span></span>
@@ -492,7 +492,7 @@ Akima</a></h3>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">pchip</span>(x, y)</span>
 <span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.625</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; [1] 1.25</span></span>
@@ -508,7 +508,7 @@ Hermite</a></h3>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>d2ydx2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>interpolator <span class="ot">&lt;-</span> <span class="fu">quintic_hermite</span>(x, y, dydx, d2ydx2)</span>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">spline</span>(xi)</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
 <span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; [1] 0.640625</span></span>
 <span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; [1] 1.40625</span></span>

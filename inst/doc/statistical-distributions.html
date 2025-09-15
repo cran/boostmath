@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Boost Math - Statistical Distributions</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Boost Math - Statistical Distributions</h1>
+
+
+
+<div id="statistics" class="section level2">
+<h2>Statistics</h2>
+<p>The <a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/dist.html">Statistical
+Distributions</a> section of the Boost Math library cover a broad range
+of areas</p>
+<div id="arcsine-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/arcine_dist.html">Arcsine
+Distribution</a></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">arcsine_pdf</span>(<span class="fl">0.5</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.6366198</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">arcsine_lpdf</span>(<span class="fl">0.5</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&gt; [1] -0.4515827</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">arcsine_cdf</span>(<span class="fl">0.5</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">arcsine_lcdf</span>(<span class="fl">0.5</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">arcsine_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span></code></pre></div>
+</div>
+<div id="bernoulli-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/bernoulli_dist.html">Bernoulli
+Distribution</a></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">bernoulli_pdf</span>(<span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">bernoulli_lpdf</span>(<span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">bernoulli_cdf</span>(<span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">bernoulli_lcdf</span>(<span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">bernoulli_quantile</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="beta-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/beta_dist.html">Beta
+Distribution</a></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Beta distribution with shape parameters alpha = 2, beta = 5</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">beta_pdf</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.9375</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">beta_lpdf</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; [1] -0.06453852</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">beta_cdf</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.890625</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">beta_lcdf</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.1158318</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="fu">beta_quantile</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.26445</span></span></code></pre></div>
+</div>
+<div id="binomial-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/binomial_dist.html">Binomial
+Distribution</a></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Binomial dist ribution with n = 10, prob = 0.5</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">binomial_pdf</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.1171875</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">binomial_lpdf</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; [1] -2.14398</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">binomial_cdf</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.171875</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="fu">binomial_lcdf</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; [1] -1.760988</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="fu">binomial_quantile</span>(<span class="fl">0.5</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; [1] 5</span></span></code></pre></div>
+</div>
+<div id="cauchy-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/cauchy_dist.html">Cauchy
+Distribution</a></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Cauchy distribution with location = 0, scale = 1</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">cauchy_pdf</span>(<span class="dv">0</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3183099</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">cauchy_lpdf</span>(<span class="dv">0</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.14473</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="fu">cauchy_cdf</span>(<span class="dv">0</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="fu">cauchy_lcdf</span>(<span class="dv">0</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="fu">cauchy_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="chi-squared-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/chi_squared_dist.html">Chi-Squared
+Distribution</a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Chi-Squared distribution with 3 degrees of freedom</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">chi_squared_pdf</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.2075537</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">chi_squared_lpdf</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.572365</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">chi_squared_cdf</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.4275933</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="fu">chi_squared_lcdf</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.8495828</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="fu">chi_squared_quantile</span>(<span class="fl">0.5</span>, <span class="dv">3</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; [1] 2.365974</span></span></code></pre></div>
+</div>
+<div id="exponential-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/exp_dist.html">Exponential
+Distribution</a></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Exponential distribution with rate parameter lambda = 2</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">exponential_pdf</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.2706706</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">exponential_lpdf</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.306853</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">exponential_cdf</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.8646647</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="fu">exponential_lcdf</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.1454135</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="fu">exponential_quantile</span>(<span class="fl">0.5</span>, <span class="dv">2</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.3465736</span></span></code></pre></div>
+</div>
+<div id="extreme-value-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/extreme_dist.html">Extreme
+Value Distribution</a></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Extreme Value distribution with location = 0, scale = 1</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">extreme_value_pdf</span>(<span class="dv">0</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3678794</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="fu">extreme_value_lpdf</span>(<span class="dv">0</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; [1] -1</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="fu">extreme_value_cdf</span>(<span class="dv">0</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.3678794</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="fu">extreme_value_lcdf</span>(<span class="dv">0</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; [1] -1</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="fu">extreme_value_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.3665129</span></span></code></pre></div>
+</div>
+<div id="f-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/f_dist.html">F
+Distribution</a></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Fisher F distribution with df1 = 5, df2 = 2</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">fisher_f_pdf</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3080008</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">fisher_f_lpdf</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.177653</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">fisher_f_cdf</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.4312012</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">fisher_f_lcdf</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.8411806</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="fu">fisher_f_quantile</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; [1] 1.251925</span></span></code></pre></div>
+</div>
+<div id="gamma-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/gamma_dist.html">Gamma
+Distribution</a></h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Gamma distribution with shape = 3, scale = 4</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">gamma_pdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.01895408</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="fu">gamma_lpdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; [1] -3.965736</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="fu">gamma_cdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.01438768</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="fu">gamma_lcdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt; [1] -4.241383</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="fu">gamma_quantile</span>(<span class="fl">0.5</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co">#&gt; [1] 10.69624</span></span></code></pre></div>
+</div>
+<div id="geometric-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/geometric_dist.html">Geometric
+Distribution</a></h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Geometric distribution with probability of success prob = 0.5</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">geometric_pdf</span>(<span class="dv">3</span>, <span class="fl">0.5</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.0625</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="fu">geometric_lpdf</span>(<span class="dv">3</span>, <span class="fl">0.5</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; [1] -2.772589</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="fu">geometric_cdf</span>(<span class="dv">3</span>, <span class="fl">0.5</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.9375</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="fu">geometric_lcdf</span>(<span class="dv">3</span>, <span class="fl">0.5</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.06453852</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="fu">geometric_quantile</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="holtsmark-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/holtsmark_dist.html">Holtsmark
+Distribution</a></h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Holtsmark distribution with location 0 and scale 1</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">holtsmark_pdf</span>(<span class="dv">3</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.03150942</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="fu">holtsmark_lpdf</span>(<span class="dv">3</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; [1] -3.457469</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="fu">holtsmark_cdf</span>(<span class="dv">3</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.9484022</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="fu">holtsmark_lcdf</span>(<span class="dv">3</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.05297661</span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="fu">holtsmark_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="hyperexponential-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/hyperexponential_dist.html">Hyperexponential
+Distribution</a></h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Hyperexponential distribution with probabilities = c(0.5, 0.5) and rates = c(1, 2)</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">hyperexponential_pdf</span>(<span class="dv">2</span>, <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.08598328</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="fu">hyperexponential_lpdf</span>(<span class="dv">2</span>, <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; [1] -2.453602</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="fu">hyperexponential_cdf</span>(<span class="dv">2</span>, <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.9231745</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">hyperexponential_lcdf</span>(<span class="dv">2</span>, <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.07993696</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="fu">hyperexponential_quantile</span>(<span class="fl">0.5</span>, <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.4812118</span></span></code></pre></div>
+</div>
+<div id="hypergeometric-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/hypergeometric_dist.html">Hypergeometric
+Distribution</a></h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Hypergeometric distribution with r = 5, n = 10, N = 20</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">hypergeometric_pdf</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3482972</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="fu">hypergeometric_lpdf</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.054699</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="fu">hypergeometric_cdf</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.8482972</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="fu">hypergeometric_lcdf</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.1645242</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="fu">hypergeometric_quantile</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
+</div>
+<div id="inverse-chi-squared-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/inverse_chi_squared_dist.html">Inverse
+Chi-Squared Distribution</a></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Inverse Chi-Squared distribution with 3 degrees of freedom, scale = 1</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">inverse_chi_squared_pdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.1730996</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="fu">inverse_chi_squared_lpdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.753888</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="fu">inverse_chi_squared_cdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.6822703</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="fu">inverse_chi_squared_lcdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.3823293</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="fu">inverse_chi_squared_quantile</span>(<span class="fl">0.5</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#&gt; [1] 1.267977</span></span></code></pre></div>
+</div>
+<div id="inverse-gamma-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/inverse_gamma_dist.html">Inverse
+Gamma Distribution</a></h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Inverse Gamma distribution with shape = 3, scale = 4</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">inverse_gamma_pdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.2706706</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="fu">inverse_gamma_lpdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.306853</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="fu">inverse_gamma_cdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.6766764</span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="fu">inverse_gamma_lcdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.3905621</span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="fu">inverse_gamma_quantile</span>(<span class="fl">0.5</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">#&gt; [1] 1.495853</span></span></code></pre></div>
+</div>
+<div id="inverse-gaussian-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/inverse_gaussian_dist.html">Inverse
+Gaussian Distribution</a></h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Inverse Gaussian distribution with mu = 3, lambda = 4</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">inverse_gaussian_pdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.2524295</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="fu">inverse_gaussian_lpdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.376623</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="fu">inverse_gaussian_cdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.4512408</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="fu">inverse_gaussian_lcdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.7957542</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="fu">inverse_gaussian_quantile</span>(<span class="fl">0.5</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co">#&gt; [1] 2.202698</span></span></code></pre></div>
+</div>
+<div id="kolmogorov-smirnov-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/kolmogorov_smirnov_dist.html">Kolmogorov-Smirnov
+Distribution</a></h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Kolmogorov-Smirnov distribution with sample size n = 10</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">kolmogorov_smirnov_pdf</span>(<span class="fl">0.5</span>, <span class="dv">10</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.2695176</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="fu">kolmogorov_smirnov_lpdf</span>(<span class="fl">0.5</span>, <span class="dv">10</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.311122</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="fu">kolmogorov_smirnov_cdf</span>(<span class="fl">0.5</span>, <span class="dv">10</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.9865241</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="fu">kolmogorov_smirnov_lcdf</span>(<span class="fl">0.5</span>, <span class="dv">10</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.01356751</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="fu">kolmogorov_smirnov_quantile</span>(<span class="fl">0.5</span>, <span class="dv">10</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.2617017</span></span></code></pre></div>
+</div>
+<div id="landau-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/landau_dist.html">Landau
+Distribution</a></h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Landau distribution with location 0 and scale 1</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="fu">landau_pdf</span>(<span class="dv">3</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.05863949</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="fu">landau_lpdf</span>(<span class="dv">3</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt; [1] -2.836347</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="fu">landau_cdf</span>(<span class="dv">3</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.7792967</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="fu">landau_lcdf</span>(<span class="dv">3</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.2493635</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="fu">landau_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.5756301</span></span></code></pre></div>
+</div>
+<div id="laplace-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/laplace_dist.html">Laplace
+Distribution</a></h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Laplace distribution with location = 0, scale = 1</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="fu">laplace_pdf</span>(<span class="dv">0</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="fu">laplace_lpdf</span>(<span class="dv">0</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="fu">laplace_cdf</span>(<span class="dv">0</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="fu">laplace_lcdf</span>(<span class="dv">0</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="fu">laplace_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="logistic-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/logistic_dist.html">Logistic
+Distribution</a></h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Logistic distribution with location = 0, scale = 1</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">logistic_pdf</span>(<span class="dv">0</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.25</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="fu">logistic_lpdf</span>(<span class="dv">0</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.386294</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="fu">logistic_cdf</span>(<span class="dv">0</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="fu">logistic_lcdf</span>(<span class="dv">0</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="fu">logistic_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="log-normal-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/lognormal_dist.html">Log
+Normal Distribution</a></h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Log Normal distribution with location = 0, scale = 1</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="fu">lognormal_pdf</span>(<span class="dv">0</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="fu">lognormal_lpdf</span>(<span class="dv">0</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co">#&gt; [1] -Inf</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="fu">lognormal_cdf</span>(<span class="dv">0</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="fu">lognormal_lcdf</span>(<span class="dv">0</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="co">#&gt; [1] -Inf</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a><span class="fu">lognormal_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+</div>
+<div id="map-airy-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/mapairy_dist.html">Map-Airy
+Distribution</a></h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Map-Airy distribution with location 0 and scale 1</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">mapairy_pdf</span>(<span class="dv">3</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.02799732</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="fu">mapairy_lpdf</span>(<span class="dv">3</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co">#&gt; [1] -3.575647</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="fu">mapairy_cdf</span>(<span class="dv">3</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.9316961</span></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="fu">mapairy_lcdf</span>(<span class="dv">3</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.07074859</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="fu">mapairy_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="co">#&gt; [1] -0.7167107</span></span></code></pre></div>
+</div>
+<div id="negative-binomial-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/negative_binomial_dist.html">Negative
+Binomial Distribution</a></h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">negative_binomial_pdf</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.1367188</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="fu">negative_binomial_lpdf</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co">#&gt; [1] -1.989829</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="fu">negative_binomial_cdf</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.3632812</span></span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="fu">negative_binomial_lcdf</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="co">#&gt; [1] -1.012578</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a><span class="fu">negative_binomial_quantile</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="co">#&gt; [1] 4</span></span></code></pre></div>
+</div>
+<div id="noncentral-beta-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/nc_beta_dist.html">Noncentral
+Beta Distribution</a></h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Noncentral Beta distribution with shape parameters alpha = 2, beta = 3</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># and noncentrality parameter lambda = 1</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="fu">non_central_beta_pdf</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co">#&gt; [1] 1.643543</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="fu">non_central_beta_lpdf</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.4968546</span></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="fu">non_central_beta_cdf</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co">#&gt; [1] 0.5977904</span></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="fu">non_central_beta_lcdf</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#&gt; [1] -0.514515</span></span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="fu">non_central_beta_quantile</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co">#&gt; [1] 0.4416064</span></span></code></pre></div>
+</div>
+<div id="noncentral-chi-squared-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/nc_chi_squared_dist.html">Noncentral
+Chi-Squared Distribution</a></h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Noncentral Chi-Squared distribution with 3 degrees of freedom and noncentrality</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co"># parameter 1</span></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="fu">non_central_chi_squared_pdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co">#&gt; [1] 0.172252</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="fu">non_central_chi_squared_lpdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="co">#&gt; [1] -1.758797</span></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="fu">non_central_chi_squared_cdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="co">#&gt; [1] 0.3082525</span></span>
+<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a><span class="fu">non_central_chi_squared_lcdf</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a><span class="co">#&gt; [1] -1.176836</span></span>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a><span class="fu">non_central_chi_squared_quantile</span>(<span class="fl">0.5</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a><span class="co">#&gt; [1] 3.213009</span></span></code></pre></div>
+</div>
+<div id="noncentral-f-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/nc_f_dist.html">Noncentral
+F Distribution</a></h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Noncentral F distribution with df1 = 5, df2 = 2 and noncentrality</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="co"># parameter 1</span></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="fu">non_central_f_pdf</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#&gt; [1] 0.3051418</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="fu">non_central_f_lpdf</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="co">#&gt; [1] -1.186979</span></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="fu">non_central_f_cdf</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a><span class="co">#&gt; [1] 0.3737987</span></span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a><span class="fu">non_central_f_lcdf</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a><span class="co">#&gt; [1] -0.9840377</span></span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a><span class="fu">non_central_f_quantile</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a><span class="co">#&gt; [1] 1.507635</span></span></code></pre></div>
+</div>
+<div id="noncentral-t-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/nc_t_dist.html">Noncentral
+T Distribution</a></h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Noncentral T distribution with 3 degrees of freedom and noncentrality parameter 1</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="fu">non_central_t_pdf</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.2229319</span></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="fu">non_central_t_lpdf</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.500889</span></span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="fu">non_central_t_cdf</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.1586553</span></span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a><span class="fu">non_central_t_lcdf</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a><span class="co">#&gt; [1] -1.841022</span></span>
+<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a><span class="fu">non_central_t_quantile</span>(<span class="fl">0.5</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a><span class="co">#&gt; [1] 1.091153</span></span></code></pre></div>
+</div>
+<div id="normal-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/normal_dist.html">Normal
+Distribution</a></h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Normal distribution with mean = 0, sd = 1</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="fu">normal_pdf</span>(<span class="dv">0</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3989423</span></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="fu">normal_lpdf</span>(<span class="dv">0</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a><span class="co">#&gt; [1] -0.9189385</span></span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a><span class="fu">normal_cdf</span>(<span class="dv">0</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a><span class="fu">normal_lcdf</span>(<span class="dv">0</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a><span class="fu">normal_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="pareto-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/pareto.html">Pareto
+Distribution</a></h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Pareto distribution with shape = 1, scale = 1</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="fu">pareto_pdf</span>(<span class="dv">1</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="fu">pareto_lpdf</span>(<span class="dv">1</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a><span class="fu">pareto_cdf</span>(<span class="dv">1</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
+<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a><span class="fu">pareto_lcdf</span>(<span class="dv">1</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a><span class="co">#&gt; [1] -Inf</span></span>
+<span id="cb30-10"><a href="#cb30-10" tabindex="-1"></a><span class="fu">pareto_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+</div>
+<div id="poisson-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/poisson_dist.html">Poisson
+Distribution</a></h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Poisson distribution with lambda = 1</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="fu">poisson_pdf</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3678794</span></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="fu">poisson_lpdf</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a><span class="co">#&gt; [1] -1</span></span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="fu">poisson_cdf</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.3678794</span></span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a><span class="fu">poisson_lcdf</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a><span class="co">#&gt; [1] -1</span></span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="fu">poisson_quantile</span>(<span class="fl">0.5</span>, <span class="dv">1</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+</div>
+<div id="rayleigh-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/rayleigh.html">Rayleigh
+Distribution</a></h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co"># Rayleigh distribution with scale = 1</span></span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="fu">rayleigh_pdf</span>(<span class="dv">1</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.6065307</span></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="fu">rayleigh_lpdf</span>(<span class="dv">1</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a><span class="co">#&gt; [1] -0.5</span></span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="fu">rayleigh_cdf</span>(<span class="dv">1</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.3934693</span></span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a><span class="fu">rayleigh_lcdf</span>(<span class="dv">1</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.9327521</span></span>
+<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a><span class="fu">rayleigh_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a><span class="co">#&gt; [1] 1.17741</span></span></code></pre></div>
+</div>
+<div id="sas-point5-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/saspoint5_dist.html">SaS
+Point5 Distribution</a></h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co"># SaS Point5 distribution with location 0 and scale 1</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="fu">saspoint5_pdf</span>(<span class="dv">3</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.02379919</span></span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="fu">saspoint5_lpdf</span>(<span class="dv">3</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="co">#&gt; [1] -3.738104</span></span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a><span class="fu">saspoint5_cdf</span>(<span class="dv">3</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.8164545</span></span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="fu">saspoint5_lcdf</span>(<span class="dv">3</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.2027841</span></span>
+<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a><span class="fu">saspoint5_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="skew-normal-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/skew_normal_dist.html">Skew
+Normal Distribution</a></h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># Skew Normal distribution with location = 0, scale = 1, shape = 0</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="fu">skew_normal_pdf</span>(<span class="dv">0</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3989423</span></span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a><span class="fu">skew_normal_lpdf</span>(<span class="dv">0</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="co">#&gt; [1] -0.9189385</span></span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a><span class="fu">skew_normal_cdf</span>(<span class="dv">0</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a><span class="fu">skew_normal_lcdf</span>(<span class="dv">0</span>)</span>
+<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a><span class="fu">skew_normal_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="students-t-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/students_t_dist.html">Student’s
+T Distribution</a></h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co"># Student&#39;s t distribution with 3 degrees of freedom</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="fu">students_t_pdf</span>(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3675526</span></span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="fu">students_t_lpdf</span>(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="co">#&gt; [1] -1.000889</span></span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a><span class="fu">students_t_cdf</span>(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a><span class="fu">students_t_lcdf</span>(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a><span class="fu">students_t_quantile</span>(<span class="fl">0.5</span>, <span class="dv">3</span>)</span>
+<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="triangular-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/triangular_dist.html">Triangular
+Distribution</a></h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co"># Triangular distribution with lower = 0, mode = 1, upper = 2</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a><span class="fu">triangular_pdf</span>(<span class="dv">1</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="fu">triangular_lpdf</span>(<span class="dv">1</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="fu">triangular_cdf</span>(<span class="dv">1</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="fu">triangular_lcdf</span>(<span class="dv">1</span>)</span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a><span class="fu">triangular_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+</div>
+<div id="uniform-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/uniform_dist.html">Uniform
+Distribution</a></h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="co"># Uniform distribution with lower = 0, upper = 1</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a><span class="fu">uniform_pdf</span>(<span class="fl">0.5</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a><span class="fu">uniform_lpdf</span>(<span class="fl">0.5</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a><span class="fu">uniform_cdf</span>(<span class="fl">0.5</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="fu">uniform_lcdf</span>(<span class="fl">0.5</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.6931472</span></span>
+<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a><span class="fu">uniform_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span></code></pre></div>
+</div>
+<div id="weibull-distribution" class="section level3">
+<h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/weibull_dist.html">Weibull
+Distribution</a></h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="co"># Weibull distribution with shape = 1, scale = 1</span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="fu">weibull_pdf</span>(<span class="dv">1</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3678794</span></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="fu">weibull_lpdf</span>(<span class="dv">1</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a><span class="co">#&gt; [1] -1</span></span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a><span class="fu">weibull_cdf</span>(<span class="dv">1</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.6321206</span></span>
+<span id="cb38-8"><a href="#cb38-8" tabindex="-1"></a><span class="fu">weibull_lcdf</span>(<span class="dv">1</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" tabindex="-1"></a><span class="co">#&gt; [1] -0.4586751</span></span>
+<span id="cb38-10"><a href="#cb38-10" tabindex="-1"></a><span class="fu">weibull_quantile</span>(<span class="fl">0.5</span>)</span>
+<span id="cb38-11"><a href="#cb38-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.6931472</span></span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
