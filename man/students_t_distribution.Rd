@@ -7,8 +7,11 @@
 \alias{students_t_cdf}
 \alias{students_t_lcdf}
 \alias{students_t_quantile}
+\alias{students_t_find_degrees_of_freedom}
 \title{Student's T Distribution Functions}
 \usage{
+students_t_distribution(df = 1)
+
 students_t_pdf(x, df = 1)
 
 students_t_lpdf(x, df = 1)
@@ -18,13 +21,31 @@ students_t_cdf(x, df = 1)
 students_t_lcdf(x, df = 1)
 
 students_t_quantile(p, df = 1)
+
+students_t_find_degrees_of_freedom(
+  difference_from_mean,
+  alpha,
+  beta,
+  sd,
+  hint = 100
+)
 }
 \arguments{
-\item{x}{quantile}
-
 \item{df}{degrees of freedom (default is 1)}
 
+\item{x}{quantile}
+
 \item{p}{probability (0 <= p <= 1)}
+
+\item{difference_from_mean}{The difference from the assumed nominal mean that is to be detected.}
+
+\item{alpha}{The acceptable probability of a Type I error (false positive).}
+
+\item{beta}{The acceptable probability of a Type II error (false negative).}
+
+\item{sd}{The assumed standard deviation.}
+
+\item{hint}{An initial guess for the degrees of freedom to start the search from (current sample size is a good start).}
 }
 \value{
 A single numeric value with the computed probability density, log-probability density, cumulative distribution, log-cumulative distribution, or quantile depending on the function called.
@@ -33,12 +54,37 @@ A single numeric value with the computed probability density, log-probability de
 Functions to compute the probability density function, cumulative distribution function, and quantile function for the Student's t distribution.
 }
 \examples{
-# Student's t distribution with 3 degrees of freedom
-students_t_pdf(0, 3)
-students_t_lpdf(0, 3)
-students_t_cdf(0, 3)
-students_t_lcdf(0, 3)
-students_t_quantile(0.5, 3)
+# Student's t distribution with 5 degrees of freedom
+dist <- students_t_distribution(5)
+# Apply generic functions
+cdf(dist, 0.5)
+logcdf(dist, 0.5)
+pdf(dist, 0.5)
+logpdf(dist, 0.5)
+hazard(dist, 0.5)
+chf(dist, 0.5)
+mean(dist)
+median(dist)
+mode(dist)
+range(dist)
+quantile(dist, 0.2)
+standard_deviation(dist)
+support(dist)
+variance(dist)
+skewness(dist)
+kurtosis(dist)
+kurtosis_excess(dist)
+
+# Convenience functions
+students_t_pdf(0, 5)
+students_t_lpdf(0, 5)
+students_t_cdf(0, 5)
+students_t_lcdf(0, 5)
+students_t_quantile(0.5, 5)
+
+# Find degrees of freedom needed to detect a difference from mean of 2.0
+# with alpha = 0.05 and beta = 0.2 when the standard deviation is 3.0
+students_t_find_degrees_of_freedom(2.0, 0.05, 0.2, 3.0)
 }
 \seealso{
 \href{https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/students_t_dist.html}{Boost Documentation} for more details on the mathematical background.

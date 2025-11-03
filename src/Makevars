@@ -1,4 +1,5 @@
 CXX_STD=CXX17
+PKG_CPPFLAGS = -DBOOST_MATH_ASSERT_UNDEFINED_POLICY=false
 
 SOURCES = init.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -10,6 +11,7 @@ BOOST_SOURCES = \
 	quadrature_and_differentiation.cpp \
 	rootfinding_and_minimisation.cpp \
 	special_functions.cpp \
+	distribution_member_functions.cpp \
 	statistical_distributions.cpp \
 	statistics.cpp \
 	vector_functionals.cpp \

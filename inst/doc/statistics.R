@@ -35,7 +35,7 @@ gini_coefficient(c(1, 2, 3, 4, 5))
 # Sample Gini Coefficient
 sample_gini_coefficient(c(1, 2, 3, 4, 5))
 # Mode
-mode_boost(c(1, 2, 2, 3, 4))
+mode(c(1, 2, 2, 3, 4))
 
 ## -----------------------------------------------------------------------------
 # Covariance

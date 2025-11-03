@@ -7,8 +7,14 @@
 \alias{geometric_cdf}
 \alias{geometric_lcdf}
 \alias{geometric_quantile}
+\alias{geometric_find_lower_bound_on_p}
+\alias{geometric_find_upper_bound_on_p}
+\alias{geometric_find_minimum_number_of_trials}
+\alias{geometric_find_maximum_number_of_trials}
 \title{Geometric Distribution Functions}
 \usage{
+geometric_distribution(prob)
+
 geometric_pdf(x, prob)
 
 geometric_lpdf(x, prob)
@@ -18,13 +24,27 @@ geometric_cdf(x, prob)
 geometric_lcdf(x, prob)
 
 geometric_quantile(p, prob)
+
+geometric_find_lower_bound_on_p(trials, alpha)
+
+geometric_find_upper_bound_on_p(trials, alpha)
+
+geometric_find_minimum_number_of_trials(failures, prob, alpha)
+
+geometric_find_maximum_number_of_trials(failures, prob, alpha)
 }
 \arguments{
-\item{x}{quantile (non-negative integer)}
-
 \item{prob}{probability of success (0 < prob < 1)}
 
+\item{x}{quantile (non-negative integer)}
+
 \item{p}{probability (0 <= p <= 1)}
+
+\item{trials}{number of trials}
+
+\item{alpha}{Largest acceptable probability that the true value of the success fraction is less than the value returned (by \code{geometric_find_lower_bound_on_p}) or greater than the value returned (by \code{geometric_find_upper_bound_on_p}).}
+
+\item{failures}{number of failures}
 }
 \value{
 A single numeric value with the computed probability density, log-probability density, cumulative distribution, log-cumulative distribution, or quantile depending on the function called.
@@ -34,11 +54,42 @@ Functions to compute the probability density function, cumulative distribution f
 }
 \examples{
 # Geometric distribution with probability of success prob = 0.5
+dist <- geometric_distribution(0.5)
+# Apply generic functions
+cdf(dist, 0.5)
+logcdf(dist, 0.5)
+pdf(dist, 0.5)
+logpdf(dist, 0.5)
+hazard(dist, 0.5)
+chf(dist, 0.5)
+mean(dist)
+median(dist)
+mode(dist)
+range(dist)
+quantile(dist, 0.2)
+standard_deviation(dist)
+support(dist)
+variance(dist)
+skewness(dist)
+kurtosis(dist)
+kurtosis_excess(dist)
+
+# Convenience functions
 geometric_pdf(3, 0.5)
 geometric_lpdf(3, 0.5)
 geometric_cdf(3, 0.5)
 geometric_lcdf(3, 0.5)
 geometric_quantile(0.5, 0.5)
+\dontrun{
+# Find lower bound on p given 5 trials with 95\% confidence
+geometric_find_lower_bound_on_p(5, 0.05)
+# Find upper bound on p given 5 trials with 95\% confidence
+geometric_find_upper_bound_on_p(5, 0.05)
+# Find minimum number of trials to observe 3 failures with p = 0.5 at 95\% confidence
+geometric_find_minimum_number_of_trials(3, 0.5, 0.05)
+# Find maximum number of trials to observe 3 failures with p = 0.5 at 95\% confidence
+geometric_find_maximum_number_of_trials(3, 0.5, 0.05)
+}
 }
 \seealso{
 \href{https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/geometric_dist.html}{Boost Documentation} for more details on the mathematical background.

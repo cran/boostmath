@@ -386,8 +386,7 @@ Polynomial</a></h3>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; [1] 3.00 4.08 0.00</span></span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>new_control_point <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">edit_control_point</span>(new_control_point, <span class="dv">2</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">edit_control_point</span>(new_control_point, <span class="dv">2</span>)</span></code></pre></div>
 </div>
 <div id="bilinear-uniform" class="section level3">
 <h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bilinear_uniform.html">Bilinear
@@ -453,10 +452,17 @@ Hermite</a></h3>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.625</span></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; [1] 1.25</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">push_back</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">domain</span>()</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; [1] 0 3</span></span></code></pre></div>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">domain</span>()</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; [1] 0 2</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co"># Add a new point</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">push_back</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; [1] 0.625</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; [1] 1.25</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">domain</span>()</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; [1] 0 3</span></span></code></pre></div>
 </div>
 <div id="cardinal-cubic-hermite" class="section level3">
 <h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/cubic_hermite.html">Cardinal
@@ -483,8 +489,13 @@ Akima</a></h3>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.7291667</span></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; [1] 1.208333</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">push_back</span>(<span class="dv">4</span>, <span class="dv">1</span>)</span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co"># Add a new point</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">push_back</span>(<span class="dv">4</span>, <span class="dv">1</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; [1] 0.7291667</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; [1] 1.208333</span></span></code></pre></div>
 </div>
 <div id="pchip" class="section level3">
 <h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/pchip.html">PCHIP</a></h3>
@@ -496,8 +507,13 @@ Akima</a></h3>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.625</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; [1] 1.25</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">push_back</span>(<span class="dv">4</span>, <span class="dv">1</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># Add a new point</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">push_back</span>(<span class="dv">4</span>, <span class="dv">1</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#&gt; [1] 0.625</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; [1] 1.25</span></span></code></pre></div>
 </div>
 <div id="quintic-hermite" class="section level3">
 <h3><a href="https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/quintic_hermite.html">Quintic
@@ -514,10 +530,20 @@ Hermite</a></h3>
 <span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; [1] 1.40625</span></span>
 <span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">double_prime</span>(xi)</span>
 <span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="co">#&gt; [1] -1.25</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">push_back</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">domain</span>()</span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; [1] 0 3</span></span></code></pre></div>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">domain</span>()</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">#&gt; [1] 0 2</span></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co"># Add a new point</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">push_back</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">interpolate</span>(xi)</span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="co">#&gt; [1] 0.640625</span></span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">prime</span>(xi)</span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a><span class="co">#&gt; [1] 1.40625</span></span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">double_prime</span>(xi)</span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="co">#&gt; [1] -1.25</span></span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a>interpolator<span class="sc">$</span><span class="fu">domain</span>()</span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="co">#&gt; [1] 0 3</span></span></code></pre></div>
 </div>
 </div>
 

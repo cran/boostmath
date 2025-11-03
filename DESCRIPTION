@@ -1,6 +1,6 @@
 Package: boostmath
 Title: 'R' Bindings for the 'Boost' Math Functions
-Version: 1.2.0
+Version: 1.3.0
 Authors@R: 
     person(c("Andrew", "R."), "Johnson", , "andrew.johnson@arjohnsonau.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7000-8065"))
@@ -8,7 +8,8 @@ Description: 'R' bindings for the various functions and statistical distribution
     provided by the 'Boost' Math library <https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html>.
 License: MIT + file LICENSE
 URL: https://github.com/andrjohns/boostmath,
-        https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html
+        https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html,
+        https://andrjohns.github.io/boostmath/
 BugReports: https://github.com/andrjohns/boostmath/issues
 Encoding: UTF-8
 RoxygenNote: 7.3.3
@@ -17,9 +18,9 @@ LinkingTo: cpp11, BH (>= 1.87.0)
 NeedsCompilation: yes
 Suggests: knitr, rmarkdown, tinytest
 VignetteBuilder: knitr
-Packaged: 2025-09-15 12:07:51 UTC; andrew
+Packaged: 2025-11-03 01:24:33 UTC; he184239
 Author: Andrew R. Johnson [aut, cre] (ORCID:
     <https://orcid.org/0000-0001-7000-8065>)
 Maintainer: Andrew R. Johnson <andrew.johnson@arjohnsonau.com>
 Repository: CRAN
-Date/Publication: 2025-09-15 12:30:02 UTC
+Date/Publication: 2025-11-03 03:20:18 UTC

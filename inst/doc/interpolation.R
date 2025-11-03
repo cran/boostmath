@@ -78,7 +78,12 @@ interpolator <- cubic_hermite(x, y, dydx)
 xi <- 0.5
 interpolator$interpolate(xi)
 interpolator$prime(xi)
+interpolator$domain()
+
+# Add a new point
 interpolator$push_back(3, 0, 1)
+interpolator$interpolate(xi)
+interpolator$prime(xi)
 interpolator$domain()
 
 ## -----------------------------------------------------------------------------
@@ -97,7 +102,11 @@ interpolator <- makima(x, y)
 xi <- 0.5
 interpolator$interpolate(xi)
 interpolator$prime(xi)
+
+# Add a new point
 interpolator$push_back(4, 1)
+interpolator$interpolate(xi)
+interpolator$prime(xi)
 
 ## -----------------------------------------------------------------------------
 x <- c(0, 1, 2, 3)
@@ -106,7 +115,11 @@ interpolator <- pchip(x, y)
 xi <- 0.5
 interpolator$interpolate(xi)
 interpolator$prime(xi)
+
+# Add a new point
 interpolator$push_back(4, 1)
+interpolator$interpolate(xi)
+interpolator$prime(xi)
 
 ## -----------------------------------------------------------------------------
 x <- c(0, 1, 2)
@@ -118,6 +131,12 @@ xi <- 0.5
 interpolator$interpolate(xi)
 interpolator$prime(xi)
 interpolator$double_prime(xi)
+interpolator$domain()
+
+# Add a new point
 interpolator$push_back(3, 0, 1, 0)
+interpolator$interpolate(xi)
+interpolator$prime(xi)
+interpolator$double_prime(xi)
 interpolator$domain()
 
