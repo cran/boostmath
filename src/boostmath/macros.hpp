@@ -1,14 +1,8 @@
 #ifndef BOOSTMATH_MACROS_HPP
 #define BOOSTMATH_MACROS_HPP
 
+#include <cpp11/declarations.hpp>
 #include "sexp.hpp"
-
-#define NOARG_BOOST_FUNCTION(name) \
-  extern "C" SEXP name##_() { \
-    BEGIN_CPP11 \
-    return boostmath::as_sexp(boost::math::name()); \
-    END_CPP11 \
-  }
 
 #define NOARG_BOOST_MEMBER(name) \
   extern "C" SEXP name##_() { \
@@ -21,13 +15,6 @@
   extern "C" SEXP name##_() { \
     BEGIN_CPP11 \
     return boostmath::as_sexp(boost::math::name<double>::value); \
-    END_CPP11 \
-  }
-
-#define NOARG_BOOST_FUNCTION_TYPE(name, template_type) \
-  extern "C" SEXP name##_() { \
-    BEGIN_CPP11 \
-    return boostmath::as_sexp(boost::math::name<template_type>()); \
     END_CPP11 \
   }
 

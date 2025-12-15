@@ -7,6 +7,7 @@ OBJECTS = $(SOURCES:.cpp=.o)
 BOOST_SOURCES = \
 	constants.cpp \
 	filters.cpp \
+	bezier_polynomial.cpp \
 	interpolators.cpp \
 	quadrature_and_differentiation.cpp \
 	rootfinding_and_minimisation.cpp \
@@ -18,7 +19,8 @@ BOOST_SOURCES = \
 	cyl_hankel_1.cpp \
 	cyl_hankel_2.cpp \
 	sph_hankel_1.cpp \
-	sph_hankel_2.cpp
+	sph_hankel_2.cpp \
+	fp_utilities.cpp
 
 BOOST_OBJECTS = $(BOOST_SOURCES:.cpp=.o)
 

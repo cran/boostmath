@@ -170,6 +170,12 @@ jacobi_double_prime(2, 1, 2, 0.5)
 jacobi_derivative(2, 1, 2, 0.5, 3)
 
 ## -----------------------------------------------------------------------------
+# Logistic Sigmoid Function
+logistic_sigmoid(0.5)
+# Logit Function
+logit(0.7)
+
+## -----------------------------------------------------------------------------
 # Bessel function of the first kind J_0(1)
 cyl_bessel_j(0, 1)
 # Bessel function of the second kind Y_0(1)

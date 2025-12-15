@@ -94,6 +94,10 @@ extern "C" {
   SEXP jacobi_prime_(SEXP n_, SEXP alpha_, SEXP beta_, SEXP x_);
   SEXP jacobi_double_prime_(SEXP n_, SEXP alpha_, SEXP beta_, SEXP x_);
 
+  // logistic_functions.cpp
+  SEXP logit_(SEXP x_);
+  SEXP logistic_sigmoid_(SEXP x_);
+
   // bessel_functions.cpp
   SEXP cyl_bessel_j_(SEXP v_, SEXP x_);
   SEXP cyl_neumann_(SEXP v_ , SEXP x_);
@@ -278,6 +282,9 @@ extern "C" {
   TERNARY_DISTRIBUTION_BOOST_DECLARATIONS(triangular)
   BINARY_DISTRIBUTION_BOOST_DECLARATIONS(uniform)
   BINARY_DISTRIBUTION_BOOST_DECLARATIONS(weibull)
+
+  SEXP ecdf_create_(SEXP data_, SEXP sorted_);
+  SEXP ecdf_val_(SEXP ecdf_ptr_, SEXP x_);
 
   SEXP beta_find_alpha_meanvar_(SEXP x_, SEXP y_);
   SEXP beta_find_alpha_betax_(SEXP x_, SEXP y_, SEXP z_);
@@ -475,6 +482,20 @@ extern "C" {
   SEXP daubechies_scaling_filter_(SEXP order_);
   SEXP daubechies_wavelet_filter_(SEXP order_);
 
+  // fp_utilities.cpp
+  SEXP float_next_(SEXP x_);
+  SEXP float_prior_(SEXP x_);
+  SEXP float_distance_(SEXP x_, SEXP y_);
+  SEXP float_advance_(SEXP x_, SEXP n_);
+  SEXP ulp_(SEXP x_);
+  SEXP relative_difference_(SEXP x_, SEXP y_);
+  SEXP epsilon_difference_(SEXP x_, SEXP y_);
+
+  // condition_numbers.cpp
+  SEXP summation_condition_number_(SEXP x_, SEXP kahan_);
+  SEXP summation_condition_number_op_(SEXP ptr_, SEXP kahan_, SEXP op_, SEXP x_);
+  SEXP evaluation_condition_number_(SEXP f_, SEXP x_);
+
   static const R_CallMethodDef CallEntries[] = {
     // gamma_functions.cpp
     {"tgamma_",     (DL_FUNC) &tgamma_,     1},
@@ -566,6 +587,10 @@ extern "C" {
     {"jacobi_derivative_", (DL_FUNC) &jacobi_derivative_, 5},
     {"jacobi_prime_", (DL_FUNC) &jacobi_prime_, 4},
     {"jacobi_double_prime_", (DL_FUNC) &jacobi_double_prime_, 4},
+
+    // logistic_functions.cpp
+    {"logit_", (DL_FUNC) &logit_, 1},
+    {"logistic_sigmoid_", (DL_FUNC) &logistic_sigmoid_, 1},
 
     // bessel_functions.cpp
     {"cyl_bessel_j_", (DL_FUNC) &cyl_bessel_j_, 2},
@@ -752,6 +777,8 @@ extern "C" {
     TERNARY_DISTRIBUTION_BOOST_CALLDEFS(triangular)
     BINARY_DISTRIBUTION_BOOST_CALLDEFS(uniform)
     BINARY_DISTRIBUTION_BOOST_CALLDEFS(weibull)
+    {"ecdf_create_", (DL_FUNC) &ecdf_create_, 2},
+    {"ecdf_val_", (DL_FUNC) &ecdf_val_, 2},
 
     {"beta_find_alpha_meanvar_", (DL_FUNC) &beta_find_alpha_meanvar_, 2},
     {"beta_find_alpha_betax_", (DL_FUNC) &beta_find_alpha_betax_, 3},
@@ -949,6 +976,20 @@ extern "C" {
     // filters
     {"daubechies_scaling_filter_", (DL_FUNC) &daubechies_scaling_filter_,  1},
     {"daubechies_wavelet_filter_", (DL_FUNC) &daubechies_wavelet_filter_,  1},
+
+    // fp_utilities.cpp
+    {"float_next_", (DL_FUNC) &float_next_, 1},
+    {"float_prior_", (DL_FUNC) &float_prior_, 1},
+    {"float_distance_", (DL_FUNC) &float_distance_, 2},
+    {"float_advance_", (DL_FUNC) &float_advance_, 2},
+    {"ulp_", (DL_FUNC) &ulp_, 1},
+    {"relative_difference_", (DL_FUNC) &relative_difference_, 2},
+    {"epsilon_difference_", (DL_FUNC) &epsilon_difference_, 2},
+
+    // condition_numbers.cpp
+    {"summation_condition_number_", (DL_FUNC) &summation_condition_number_, 2},
+    {"summation_condition_number_op_", (DL_FUNC) &summation_condition_number_op_, 4},
+    {"evaluation_condition_number_", (DL_FUNC) &evaluation_condition_number_, 2},
 
     {NULL, NULL, 0}
   };
